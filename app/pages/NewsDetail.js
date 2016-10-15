@@ -51,7 +51,13 @@ export default class NewsDetail extends Component {
 
     goBack() {
         const {navigator} = this.props;
-        return naviGoBack(navigator);
+        const routes = navigator.getCurrentRoutes();
+        console.log('route length = ' + routes.length);
+        if (routes.length > 1) {
+            navigator.pop();
+            return true;
+        }
+        return false;
     }
 
     componentWillMount() {
@@ -74,7 +80,7 @@ export default class NewsDetail extends Component {
     }
 
     // 组件卸载
-    componentWillUnmmount() {
+    componentWillUnmount() {
         BackAndroid.removeEventListener('hardwareBackPress', this.goBack);
     }
 
