@@ -27,7 +27,9 @@ export default class App extends Component {
         );
     }
 
-    // Navigator进行页面跳转，和把route and navigator往下传递
+
+
+  // Navigator进行页面跳转，和把route and navigator往下传递
     renderScene(route, navigator) {
         const Component = route.component;
         tempNavigator = navigator;
