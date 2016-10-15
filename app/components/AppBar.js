@@ -11,9 +11,9 @@ import {
 export default class AppBar extends Component {
 
     // 组件定义属性可以接受
-    static PropTypes = {
-        title: PropTypes.string.isRequired,
-    }
+    // static PropTypes = {
+    //     title: PropTypes.string.isRequired,
+    // }
 
     render() {
         return (
@@ -27,13 +27,13 @@ export default class AppBar extends Component {
 const styles = StyleSheet.create({
     root: {
         flexDirection: 'row',
-        flex: 1,
+        height:45,
         justifyContent: 'center',
         alignItems: 'center'
     },
     titles: {
         color: '#505050',
-        fontSize: 30,
+        fontSize: 23,
     }
 
 });
