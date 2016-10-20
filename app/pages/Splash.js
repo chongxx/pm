@@ -4,7 +4,7 @@ import {
     StyleSheet, Text, View, Image, Dimensions, StatusBar,
     Navigator
 } from "react-native";
-import Main from './Main';
+import Home from './Home';
 var splashRes = require('./../images/splash.png');
 const window = Dimensions.get('window');
 
@@ -34,8 +34,8 @@ export default class Splash extends Component {
         setTimeout(()=> {
             const { navigator } = this.props;
             navigator.push({
-                component: Main,
-                name: 'Main'
+                component: Home,
+                name: 'Home'
             });
         }, 1000);
     }
