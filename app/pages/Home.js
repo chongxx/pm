@@ -23,8 +23,8 @@ const menus_url = 'http://api.woshipm.com/config/menuV3.html?_cP=1080*1920&_cT=A
 let news_list_url = 'http://api.woshipm.com/news/listV3.html?_cP=1080*1920&_cT=Android&_cV=2.4.0';
 
 // 开来有些常用的android的控件被react native 封装了一次是可以直接拿来用的
-// Mian是需要返回所有的View 的，在组件didMount之后去请求网络，然后吧拿到的数据在来添加到顶部Tab中去
-export default class Main extends Component {
+// Home是需要返回所有的View 的，在组件didMount之后去请求网络，然后吧拿到的数据在来添加到顶部Tab中去
+export default class Home extends Component {
 
     constructor(props) {
         super(props);
