@@ -3,10 +3,17 @@
  */
 
 import React, {Component} from "react";
-import {Navigator} from "react-native";
+import {
+    Navigator,
+    Dimensions
+} from "react-native";
 
 import Splash from './pages/Splash'
 let tempNavigator; // 全局使用一个navigator，通过这个navigator的栈可以返回上一个界面
+const window = Dimensions.get('window');
+
+export let [width,height] = [window.width, window.height];
+
 export default class App extends Component {
 
     //TODO 这是JS的里面的静态方法吗？具体是什么意思呢？
@@ -22,14 +29,13 @@ export default class App extends Component {
                     component: Splash,
                     name: 'Splash'
                 }}
-                renderScene = {this.renderScene}
+                renderScene={this.renderScene}
             />
         );
     }
 
 
-
-  // Navigator进行页面跳转，和把route and navigator往下传递
+    // Navigator进行页面跳转，和把route and navigator往下传递
     renderScene(route, navigator) {
         const Component = route.component;
         tempNavigator = navigator;
