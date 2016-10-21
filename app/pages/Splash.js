@@ -8,6 +8,7 @@ import Home from './Home';
 var splashRes = require('./../images/splash.png');
 const window = Dimensions.get('window');
 
+import Main from './Main';
 let [screenWidth, screenHeight] = [window.width, window.height];
 export default class Splash extends Component {
 
@@ -34,8 +35,8 @@ export default class Splash extends Component {
         setTimeout(()=> {
             const { navigator } = this.props;
             navigator.push({
-                component: Home,
-                name: 'Home'
+                component: Main,
+                name: 'Main'
             });
         }, 1000);
     }
