@@ -7,3 +7,5 @@
 
 - [material-ui](https://github.com/callemall/material-ui)
 
+- [react-native-tab-navigator](https://github.com/exponentjs/react-native-tab-navigator)
+
