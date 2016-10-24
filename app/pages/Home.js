@@ -75,16 +75,19 @@ export default class Home extends Component {
     }
 
     componentDidMount() {
-        fetch(menus_url)
-            .then((res)=>res.json())
-            .then((resJson)=> {
-                resJson.RESULT.menus
-                this.setState({
-                    // 这里这加载五个条目就行了
-                    newsTypes: resJson.RESULT.menus.slice(0, 5),
-                });
-            })
-            .done();
+        // delay 500ms 是为了在场景切换的时候不卡顿，事实上这很有效果
+        setTimeout(()=> {
+            fetch(menus_url)
+                .then((res)=>res.json())
+                .then((resJson)=> {
+                    resJson.RESULT.menus
+                    this.setState({
+                        // 这里这加载五个条目就行了
+                        newsTypes: resJson.RESULT.menus.slice(0, 5),
+                    });
+                })
+                .done();
+        }, 500);
     }
 
 
