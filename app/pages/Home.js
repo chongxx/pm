@@ -9,12 +9,12 @@ import {
     Image,
     TouchableOpacity,
     RefershControl,
+    NativeModules
 } from "react-native";
 import AppBar from '../components/AppBar';
 import {toastShort} from '../utils/ToastUtil';
 import LoadingView from '../components/LoadingView';
 import NewsDetail from './NewsDetail';
-
 const window = Dimensions.get('window');
 let [width,height] = [window.width, window.height];
 var ScrollableTabView = require('react-native-scrollable-tab-view');
@@ -77,6 +77,7 @@ export default class Home extends Component {
     componentDidMount() {
         // delay 500ms 是为了在场景切换的时候不卡顿，事实上这很有效果
         setTimeout(()=> {
+            NativeModules.AndroidToast.show('哈哈哈', NativeModules.AndroidToast.LONG);
             fetch(menus_url)
                 .then((res)=>res.json())
                 .then((resJson)=> {
