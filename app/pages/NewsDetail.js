@@ -15,11 +15,14 @@ import {
     Image,
     TouchableOpacity,
     WebView,
-    BackAndroid
+    BackAndroid,
+    AsyncStorage
 } from "react-native";
 import LoadingView from '../components/LoadingView';
 import naviGoBack from '../utils/CommonUtil';
-
+import ActionButton from 'react-native-action-button';
+import {TAB_NORMAL_1, styles} from './Main';
+import {} from '../utils/ToastUtil'
 const link = 'http://api.woshipm.com/news/detailV3.html?_cP=1080*1920&_cT=Android&_cV=2.4.0&cwith=1080&id=';
 
 export default class NewsDetail extends Component {
@@ -45,8 +48,32 @@ export default class NewsDetail extends Component {
                     <WebView
                         source={{html: this.state.content}}
                     />
+                    <ActionButton
+                        buttonColor="rgba(231,76,60,1)"
+                        onPress={() => {
+                            this.favorideNews()
+                        }}
+                    />
                 </View>);
         }
+    }
+
+    // 收藏文章
+    //
+    favorideNews() {
+        console.log('save news');
+        let news = this.props.route.news;
+        AsyncStorage.getItem('newsss', (error, result)=> {
+            if (result === null) {
+                AsyncStorage.setItem('newsss', '{"news":[' + JSON.stringify(news) + ']}');
+            } else {
+                let favoride = JSON.parse(result);
+                favoride.news.push(news);
+                AsyncStorage.setItem('newsss', JSON.stringify(favoride));
+            }
+        });
+
+
     }
 
     goBack() {

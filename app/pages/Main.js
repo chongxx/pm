@@ -19,10 +19,11 @@ import {
 import TabNavigator from 'react-native-tab-navigator';
 //首页
 import Home from './Home';
+import Me from './Me';
 
 const TabNavigatorItem = TabNavigator.Item;
 
-const TAB_NORMAL_1 = require('../images/tabbar_1.png');
+export const TAB_NORMAL_1 = require('../images/tabbar_1.png');
 const TAB_NORMAL_2 = require('../images/tabbar_2.png');
 const TAB_NORMAL_3 = require('../images/tabbar_3.png');
 const TAB_NORMAL_4 = require('../images/tabbar_4.png');
@@ -31,6 +32,8 @@ const TAB_PRESS_2 = require('../images/tabbar_2_press.png');
 const TAB_PRESS_3 = require('../images/tabbar_3_press.png');
 const TAB_PRESS_4 = require('../images/tabbar_4_press.png');
 
+import {observer} from 'mobx-react/native'
+import observable_me from '../model/MeStore';
 export default class Main extends Component {
 
     constructor() {
@@ -102,9 +105,12 @@ export default class Main extends Component {
                 return (<Home navigator={this.props.navigator}/>);
             case 'question':
             case 'find':
-            case 'me':
                 return (<View
                     style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}><Text>{tabContent}</Text></View>);
+            case 'me':
+                // const NewMe = observer(Me);
+                // return (<NewMe store={observable_me}/>);
+                return <Me/>
         }
     }
 
@@ -136,7 +142,7 @@ export default class Main extends Component {
     }
 }
 
-const styles = StyleSheet.create({
+export const styles = StyleSheet.create({
     container: {
         flex: 1,
         backgroundColor: '#F5FCFF',
