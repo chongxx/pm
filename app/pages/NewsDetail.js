@@ -95,15 +95,17 @@ export default class NewsDetail extends Component {
         //这里获取从FirstPageComponent传递过来的参数: id
         let requestLink = link + this.props.route.news.id;
         console.log('link => ' + requestLink);
-        fetch(requestLink)
-            .then((res)=>res.json())
-            .then((resJson)=> {
-                this.setState({
-                    content: resJson.RESULT.newsInfo.content,
-                    isLoad: true
+        setTimeout(()=> {
+            fetch(requestLink)
+                .then((res)=>res.json())
+                .then((resJson)=> {
+                    this.setState({
+                        content: resJson.RESULT.newsInfo.content,
+                        isLoad: true
+                    })
                 })
-            })
-            .done();
+                .done();
+        }, 500);
     }
 
     // 组件卸载

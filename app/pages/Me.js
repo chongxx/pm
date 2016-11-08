@@ -67,8 +67,8 @@ export default class Me extends Component {
     }
 
     componentDidMount() {
-        console.log('component did mount---');
         observable_me.load();
+        console.log('component did mount---');
     }
 }
 
