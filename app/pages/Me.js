@@ -25,6 +25,8 @@ import {observer} from 'mobx-react/native'
  * By default, the left icon is a navigation-menu.
  */
 import observable_me from '../model/MeStore';
+import Icon from 'react-native-vector-icons/FontAwesome';
+
 @observer
 export default class Me extends Component {
 
@@ -43,7 +45,8 @@ export default class Me extends Component {
                     <View style={styles.me_data}>
                         <Image style={styles.me_avtar} source={{uri:observable_me.me.avtar}}></Image>
                         <Text>{observable_me.me.name}</Text>
-                        <Image></Image>
+                        <Text>{observable_me.count}</Text>
+                        <Icon name="user-circle-o" size={80} color="#FF00FF" />
                     </View>
 
                     <Button

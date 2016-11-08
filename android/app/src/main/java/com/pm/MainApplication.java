@@ -25,7 +25,8 @@ public class MainApplication extends Application implements ReactApplication {
         protected List<ReactPackage> getPackages() {
             return Arrays.<ReactPackage>asList(
                     new MainReactPackage(),
-                    new ToastReactPackage()
+                    new ToastReactPackage() // 测试原生模块的提供，这是提供了一个弹toast的方法
+                   // new VectorIconsPackage() // font icon 的原生模块
             );
         }
     };
