@@ -55,7 +55,7 @@ export default class Splash extends Component {
         // 跳转到主页
         setTimeout(()=> {
             const {navigator} = this.props;
-            navigator.push({
+            navigator.replace({
                 component: Main,
                 name: 'Main'
             });
