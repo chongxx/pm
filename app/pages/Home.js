@@ -29,6 +29,8 @@ export default class Home extends Component {
 
     constructor(props) {
         super(props);
+        this.renderContentPage = this.renderContentPage.bind(this);
+        this.renderContent = this.renderContent.bind(this);
         this.state = {
             dataSource: new ListView.DataSource({
                 rowHasChanged: (r1, r2)=>r1 !== r2,
@@ -41,31 +43,10 @@ export default class Home extends Component {
     }
 
     render() {
-        let i = -1;
         return (
             <View style={styles.root}>
                 <AppBar title="React Native"/>
-                <ScrollableTabView
-                    tabBarUnderlineStyle={styles.tabBarUnderline}
-                    tabBarBackgroundColor="#fcfcfc"
-                    tabBarActiveTextColor="#3e9ce9"
-                    tabBarInactiveTextColor="#aaaaaa"
-                    tabBarTextStyle={{paddingTop: 7}}
-                    tabBarStyle={{height: 40}}
-                >
-                    {
-                        this.state.newsTypes.map((item)=> {
-                            if (this.state.newsTypes.length <= 0) {
-                                return null;
-                            }
-                            return (
-                                <NewsList navigator={this.props.navigator} tabLabel={item.cName} key={i++}
-                                          type={item.eName}/>
-                            );
-
-                        })
-                    }
-                </ScrollableTabView>
+                {this.renderContent()}
             </View>);
     }
 
@@ -76,13 +57,42 @@ export default class Home extends Component {
             fetch(menus_url)
                 .then((res)=>res.json())
                 .then((resJson)=> {
-                    resJson.RESULT.menus.s
                     this.setState({
-                        newsTypes: resJson.RESULT.menus.slice(0, 5)
+                        newsTypes: resJson.RESULT.menus
                     });
                 })
                 .done();
         }, 500);
+    }
+
+    renderContent() {
+        console.log('state.newsTypes.length ===>' + this.state.newsTypes.length);
+        if (this.state.newsTypes.length === 0) {
+            return <LoadingView/>
+        }
+
+        return (<ScrollableTabView
+            tabBarUnderlineStyle={styles.tabBarUnderline}
+            tabBarBackgroundColor="#fcfcfc"
+            tabBarActiveTextColor="#3e9ce9"
+            tabBarInactiveTextColor="#aaaaaa"
+            tabBarTextStyle={{marginBottom:10}}
+            tabBarStyle={{height: 36}}
+            renderTabBar={()=><ScrollableTabBar style={{height:40}}/>}>
+            {this.renderContentPage()}
+        </ ScrollableTabView >);
+    }
+
+    renderContentPage() {
+        let i = -1;
+        let contents = [];
+        this.state.newsTypes.map((item)=> {
+            contents.push(
+                <NewsList navigator={this.props.navigator} tabLabel={item.cName} key={i++}
+                          type={item.eName}/>
+            );
+        })
+        return contents;
     }
 }
 

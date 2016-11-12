@@ -9,3 +9,11 @@
 
 - [react-native-tab-navigator](https://github.com/exponentjs/react-native-tab-navigator)
 
+- [mobx](https://github.com/mobxjs/mobx)
+
+- [react-native-vector-icons](https://github.com/oblador/react-native-vector-icons)
+
+- [react-native-button](https://github.com/ide/react-native-button)
+
+- [react-native-action-button](https://github.com/mastermoo/react-native-action-button)
+
