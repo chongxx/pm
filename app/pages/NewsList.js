@@ -94,7 +94,6 @@ export default class NewsList extends Component {
                     <Text style={styles.item_author_name}>{news.creator}</Text>
                     <Text style={styles.item_author_name}>点击量 {news.tClickCount}</Text>
                     <Text style={styles.item_time}>{news.publishTimeStr}</Text>
-
                 </View>
 
                 <View style={styles.divide}></View>

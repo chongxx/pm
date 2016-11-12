@@ -34,6 +34,7 @@ const TAB_PRESS_4 = require('../images/tabbar_4_press.png');
 
 import {observer} from 'mobx-react/native'
 import observable_me from '../model/MeStore';
+import Playground from './Animation';
 export default class Main extends Component {
 
     constructor() {
@@ -104,6 +105,7 @@ export default class Main extends Component {
             case 'read':
                 return (<Home navigator={this.props.navigator}/>);
             case 'question':
+                return (<Playground />);
             case 'find':
                 return (<View
                     style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}><Text>{tabContent}</Text></View>);

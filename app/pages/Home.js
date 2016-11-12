@@ -16,7 +16,7 @@ import {toastShort} from '../utils/ToastUtil';
 import LoadingView from '../components/LoadingView';
 const window = Dimensions.get('window');
 let [width,height] = [window.width, window.height];
-var ScrollableTabView = require('react-native-scrollable-tab-view');
+import ScrollableTabView, {ScrollableTabBar,} from 'react-native-scrollable-tab-view';
 // 新闻类型的地址
 const menus_url = 'http://api.woshipm.com/config/menuV3.html?_cP=1080*1920&_cT=Android&_cV=2.4.0';
 let news_list_url = 'http://api.woshipm.com/news/listV3.html?_cP=1080*1920&_cT=Android&_cV=2.4.0';
@@ -50,15 +50,17 @@ export default class Home extends Component {
                     tabBarBackgroundColor="#fcfcfc"
                     tabBarActiveTextColor="#3e9ce9"
                     tabBarInactiveTextColor="#aaaaaa"
+                    tabBarTextStyle={{paddingTop: 7}}
+                    tabBarStyle={{height: 40}}
                 >
                     {
-
                         this.state.newsTypes.map((item)=> {
                             if (this.state.newsTypes.length <= 0) {
                                 return null;
                             }
                             return (
-                                <NewsList navigator={this.props.navigator} tabLabel={item.cName} key={i++} type={item.eName}/>
+                                <NewsList navigator={this.props.navigator} tabLabel={item.cName} key={i++}
+                                          type={item.eName}/>
                             );
 
                         })
@@ -74,10 +76,9 @@ export default class Home extends Component {
             fetch(menus_url)
                 .then((res)=>res.json())
                 .then((resJson)=> {
-                    resJson.RESULT.menus
+                    resJson.RESULT.menus.s
                     this.setState({
-                        // 这里这加载五个条目就行了
-                        newsTypes: resJson.RESULT.menus.slice(0, 5),
+                        newsTypes: resJson.RESULT.menus.slice(0, 5)
                     });
                 })
                 .done();

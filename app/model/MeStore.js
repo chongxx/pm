@@ -12,7 +12,7 @@ class MeStore {
     }
 
     add = ()=> {
-        this.count++;
+        this.count = this.count+10;
         // console.log("====" + this.count);
     }
 

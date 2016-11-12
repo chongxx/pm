@@ -14,7 +14,8 @@ import {
     TouchableOpacity,
     RefershControl,
     AsyncStorage,
-    ScrollView
+    ScrollView,
+    LayoutAnimation
 } from "react-native";
 import AppBar from '../components/AppBar';
 import {WW} from '../utils/DeviceInfo';
@@ -26,6 +27,7 @@ import {observer} from 'mobx-react/native'
  */
 import observable_me from '../model/MeStore';
 import Icon from 'react-native-vector-icons/FontAwesome';
+import ProgressView from '../components/ProgressView';
 
 @observer
 export default class Me extends Component {
@@ -34,6 +36,7 @@ export default class Me extends Component {
         super(props);
         this.state = {
             name: '',
+            w: 60,
         }
     }
 
@@ -43,10 +46,11 @@ export default class Me extends Component {
                 <ScrollView>
                     <AppBar title='Me'/>
                     <View style={styles.me_data}>
-                        <Image style={styles.me_avtar} source={{uri:observable_me.me.avtar}}></Image>
+                        <Image style={[styles.me_avtar, {width: this.state.w, height: this.state.w}]}
+                               source={{uri: observable_me.me.avtar}}></Image>
                         <Text>{observable_me.me.name}</Text>
                         <Text>{observable_me.count}</Text>
-                        <Icon name="user-circle-o" size={80} color="#FF00FF" />
+                        <Icon name="user-circle-o" size={80} color="#FF00FF"/>
                     </View>
 
                     <Button
@@ -62,11 +66,44 @@ export default class Me extends Component {
                         onPress={observable_me.reduce}>
                         ---
                     </Button>
+
+                    <Button
+                        style={{fontSize: 20, color: 'green'}}
+                        styleDisabled={{color: 'red'}}
+                        onPress={this.zoomIn}>
+                        zoomIn
+                    </Button>
+
+                    <Button
+                        style={{fontSize: 20, color: 'green'}}
+                        styleDisabled={{color: 'red'}}
+                        onPress={this.zoomOut}>
+                        zoomOut
+                    </Button>
+
+
+                    <ProgressView style={{marginLeft: 10}} progress={observable_me.count}/>
                 </ScrollView>
             );
         } else {
             return (<Text style={{fontSize: 50}}>Loading...</Text>)
         }
+    }
+
+    zoomIn = () => {
+        // 让视图的尺寸变化以动画形式展现
+        LayoutAnimation.spring();
+        this.setState({w: this.state.w + 15})
+    }
+
+    zoomOut = () => {
+        // 让视图的尺寸变化以动画形式展现
+        LayoutAnimation.spring();
+        this.setState({w: this.state.w -15})
+    }
+
+    componentWillMount() {
+        LayoutAnimation.spring(); // create animation
     }
 
     componentDidMount() {
