@@ -20,6 +20,7 @@ import TabNavigator from 'react-native-tab-navigator';
 //首页
 import Home from './Home';
 import Me from './Me';
+import ThreePage from './ThreePage';
 
 const TabNavigatorItem = TabNavigator.Item;
 
@@ -32,8 +33,6 @@ const TAB_PRESS_2 = require('../images/tabbar_2_press.png');
 const TAB_PRESS_3 = require('../images/tabbar_3_press.png');
 const TAB_PRESS_4 = require('../images/tabbar_4_press.png');
 
-import {observer} from 'mobx-react/native'
-import observable_me from '../model/MeStore';
 import Playground from './Animation';
 export default class Main extends Component {
 
@@ -107,8 +106,7 @@ export default class Main extends Component {
             case 'question':
                 return (<Playground />);
             case 'find':
-                return (<View
-                    style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}><Text>{tabContent}</Text></View>);
+                return (<ThreePage></ThreePage>);
             case 'me':
                 // const NewMe = observer(Me);
                 // return (<NewMe store={observable_me}/>);
@@ -141,6 +139,14 @@ export default class Main extends Component {
                 {this.tabBarView()}
             </View>
         );
+    }
+
+    componentWillMount() {
+        console.log('main component will mount');
+    }
+
+    componentDidMount() {
+        console.log('main component did mount');
     }
 }
 
