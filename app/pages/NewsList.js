@@ -22,7 +22,7 @@ import NewsDetail from './NewsDetail';
 let news_list_url = 'http://api.woshipm.com/news/listV3.html?_cP=1080*1920&_cT=Android&_cV=2.4.0';
 const window = Dimensions.get('window');
 let [width,height] = [window.width, window.height];
-
+import ViewPager from 'react-native-viewpager';
 
 
 export default class NewsList extends Component {
@@ -31,9 +31,13 @@ export default class NewsList extends Component {
     constructor(props) {
         super(props);
         this.onPress = this.onPress.bind(this);
+        this.renderHeader = this.renderHeader.bind(this);
         this.state = {
             isLoad: false,
             dataSource: new ListView.DataSource({
+                rowHasChanged: (r1, r2)=>r1 !== r2,
+            }),
+            rotation_dataSource: new ViewPager.DataSource({
                 rowHasChanged: (r1, r2)=>r1 !== r2,
             }),
         }
@@ -53,7 +57,8 @@ export default class NewsList extends Component {
                         console.log(resJson.RESULT.news[0].title);
                         this.setState({
                             dataSource: this.state.dataSource.cloneWithRows(resJson.RESULT.news),
-                            isLoad: true
+                            isLoad: true,
+                            rotation_dataSource: this.state.rotation_dataSource.cloneWithPages(resJson.RESULT.news[1].imageList)
                         });
                     })
                     .done();
@@ -66,14 +71,37 @@ export default class NewsList extends Component {
             <ListView
                 dataSource={this.state.dataSource}
                 renderRow={this.renderItem}
+                renderHeader={this.renderHeader}
             >
             </ListView>);
     }
 
-    //单个条目的渲染
+    renderHeader = () => {
+        console.log('this.state.rotation_dataSource' + this.state.rotation_dataSource)
+        return (
+            <ViewPager
+                dataSource={this.state.rotation_dataSource}
+                renderPage={this.renderRotationItem}
+                isLoop={true}
+                autoPlay={true}
+            />
+        );
+    }
+
+    renderRotationItem = (data, pageID)=> {
+        console.log('rotation data ==> ' + data);
+        return (
+            <Image
+                key={data}
+                source={{uri: data}}
+                style={{width: width, height: width / 2}}/>
+        );
+    }
+
+//单个条目的渲染
     renderItem = (news)=> {
         return (
-            <TouchableOpacity onPress={()=>this.onPress(news)} style={{}}>
+            <TouchableOpacity activeOpacity={0.7} onPress={()=>this.onPress(news)} style={{}}>
                 <View style={styles.item_img}>
 
                     <Image style={{
@@ -100,8 +128,8 @@ export default class NewsList extends Component {
             </TouchableOpacity>);
     }
 
-    // 点击新闻,跳转到新闻详情页
-    onPress(news){
+// 点击新闻,跳转到新闻详情页
+    onPress(news) {
         console.log('click item.');
         const {navigator} = this.props;
         navigator.push({

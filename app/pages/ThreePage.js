@@ -30,9 +30,11 @@ export default class ThreePage extends Component {
     componentWillMount() {
     }
 
-    _onScroll = (range) => {
-        offset = range.nativeEvent.contentOffset.y;
-        threeStore.calculateOpacity(offset)
+    _onScroll = (scrollEvent) => {
+        console.log(Object.getOwnPropertyNames(scrollEvent));
+
+        let offset = scrollEvent.nativeEvent.contentOffset.y;
+        threeStore.calculateOpacity(offset);
     }
 
     render() {
@@ -40,11 +42,10 @@ export default class ThreePage extends Component {
 
             <View style={{height: 800, position: 'relative'}}>
 
-
+                <GradientBar style={{zIndex:1}} opacityValue={threeStore.opacity}/>
                 <ScrollView
                     style={{}}
-                    onScroll={this._onScroll}
-                >
+                    onScroll={this._onScroll}>
                     <View style={{backgroundColor: 'red', height: 400}}></View>
                     <View style={{backgroundColor: 'blue', height: 800}}></View>
                     {/*<View>
@@ -93,7 +94,7 @@ export default class ThreePage extends Component {
 
                 </ScrollView>
 
-                <GradientBar opacityValue={threeStore.opacity}/>
+
 
             </View>
         );

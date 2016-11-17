@@ -7,9 +7,9 @@ class ThreeStore {
 
     // 这里具体除以多少还是要看控件的移动距离的回调是怎么给值的
     calculateOpacity = (range)=> {
-        if (range < 300) {
+        if (range < 400) {
             console.log("range " + range);
-            this.opacity = range / 300;
+            this.opacity = range / 200;
         }
     }
 }

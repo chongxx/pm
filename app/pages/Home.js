@@ -76,9 +76,9 @@ export default class Home extends Component {
             tabBarBackgroundColor="#fcfcfc"
             tabBarActiveTextColor="#3e9ce9"
             tabBarInactiveTextColor="#aaaaaa"
-            tabBarTextStyle={{marginBottom:10}}
+            tabBarTextStyle={{marginBottom: 10}}
             tabBarStyle={{height: 36}}
-            renderTabBar={()=><ScrollableTabBar style={{height:40}}/>}>
+            renderTabBar={()=><ScrollableTabBar style={{height: 40}}/>}>
             {this.renderContentPage()}
         </ ScrollableTabView >);
     }
